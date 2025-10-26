@@ -33,6 +33,17 @@
             }
         }
 
+        //funcao para mostrar mensagem de erro
+        mensagem = function(msg, url, icone) {
+           Swal.fire({
+            icon: ícone,
+            tittle: msg,
+            confirmButtonText: 'OK',
+           }).then((result) => {
+            location.href = url;
+           });
+        }
+
     </script>
 </head>
 <body>
@@ -42,10 +53,21 @@
             require "../views/index/login.php";
         } else if ((!isset($_SESSION["pneuxpress"])) && ($_POST)) {
             //nao tem secao mas foi dado post
-            require "../controllers/index/loginController.php";
+            $email = trim($_POST["email"] ?? NULL);
+            $senha = trim($_POST["senha"] ?? NULL);
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                echo "<script>mensagem('E-mail Inválido!', 'index', 'error');</script>";
+            } else if (empty($senha)) {
+                echo "<script>mensagem('Senha Inválida!', 'index', 'error');</script>";
+            } else {
+                //se tem senha e email validos
+                require "../controllers/indexController.php";
+                $acao = new indexController();
+                $acao->verificar($email, $senha);
+            }  
         } else {
-            require "";
-            
+            //echo "Passou";
         }
     ?>
 </body>
