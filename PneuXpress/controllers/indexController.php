@@ -13,7 +13,17 @@
         }
 
         public function index() {
-           
+           require "../views/index/index.php";
+        }
+
+        public function erro() {
+            require "../views/index/erro.php";
+        }
+
+        public function sair() {
+            //session_destroy();
+            unset($_SESSION["pneuxpress"]);
+            echo "<script>location.href='index'</script>";
         }
 
         public function verificar($email, $senha) {
