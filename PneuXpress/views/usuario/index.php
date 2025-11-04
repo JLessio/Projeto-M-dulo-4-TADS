@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-12 co-md-4">
                         <label for="telefone">Telefone:</label>
-                        <input type="text" name="telefone" id="telefone" class="form-control" required data-parsley-required-message="Digite um telefone">
+                        <input type="text" name="telefone" id="telefone" class="form-control" required data-parsley-required-message="Digite um telefone" value="<?=$telefone?>">
                     </div>
                     <div class="col-12 col-md-2">
                         <label for="ativo">Ativo:</label>

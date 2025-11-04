@@ -1,44 +1,44 @@
 <div class="card">
     <div class="card-header">
-        <h2 class="float-start">Lista de Categorias</h2>
+        <h2 class="float-start">Lista de usuarios</h2>
         <div class="float-end">
-            <a href="categoria" title="Novo Registro" class="btn btn-success">
+            <a href="usuario" title="Novo" class="btn btn-success">
                 <i class="fas fa-file"></i> Novo Registro
             </a>
 
-            <a href="categoria/listar" title="Listar" class="btn btn-success">
+            <a href="usuario/listar" title="Listar" class="btn btn-success">
                 <i class="fas fa-file"></i> Listar
             </a>
         </div>
     </div>
     <div class="card-body">
-        <p>Abaixo as categorias cadastradas:</p>
+        <!-- <p>Abaixo as usuarios cadastradas:</p> -->
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <td>ID</td>
-                    <td>Categoria</td>
-                    <td>Ativo</td>
+                    <td>Nome de Usuário</td>
+                    <td>Telefone</td>
                     <td>Opções</td>
                 </tr>
             </thead>
             <tbody>
                 <?php 
-                    $dadosCategoria = $this->categoria->listar();
-                    foreach ($dadosCategoria as $dados) {
+                    $dadosusuario = $this->usuario->listar();
+                    foreach ($dadosusuario as $dados) {
 
-                        $ativo = "<span class='alert alert-success'>Sim</span>";
-                        if ($dados->ativo == 'N') $ativo = "<span class='alert alert-danger'>Não</span>";
+                        // $ativo = "<span class='alert alert-success'>Sim</span>";
+                        // if ($dados->ativo == 'N') $ativo = "<span class='alert alert-danger'>Não</span>";
                         ?>
                         <tr>
                             <td><?=$dados->id?></td>
-                            <td><?=$dados->descricao?></td>
-                            <td><?=$ativo?></td>
+                            <td><?=$dados->nome?></td>
+                            <td><?=$dados->telefone?></td>
                             <td width="150px">
-                                <a href="javascript:excluir(<?=$dados->id?>, 'categoria')" class="btn btn-danger btn-sm">
+                                <!-- <a href="javascript:excluir(<?=$dados->id?>, 'usuario')" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
-                                </a>
-                                <a href="categoria/index/<?=$dados->id?>" class="btn btn-info btn-sm">
+                                </a> -->
+                                <a href="usuario/index/<?=$dados->id?>" class="btn btn-success">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>

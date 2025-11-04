@@ -1,25 +1,61 @@
 <!-- include summernote css/js -->
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
 
 <?php
 
-    if (!empty($id)) {
-        $dadaos = $this->produto->editar($id);
-    }
+if (!empty($id)) {
+    $dadaos = $this->produto->editar($id);
+}
 
-    $id = $dados->id ?? NULL;
-    $nome = $dados->nome ?? NULL;
-    $descricao = $dados->descricao ?? NULL;
-    $valor = $dados->valor ?? NULL;
-    $destaque = $dados->destaque ?? NULL;
-    $ativo = $dados->ativo ?? NULL;
-    $imagem = $dados->imagem ?? NULL;
-    $categoria_id = $dados->categoria_id ?? NULL;
+$id = $dados->id ?? NULL;
+$nome = $dados->nome ?? NULL;
+$descricao = $dados->descricao ?? NULL;
+$valor = $dados->valor ?? NULL;
+$destaque = $dados->destaque ?? NULL;
+$ativo = $dados->ativo ?? NULL;
+$imagem = $dados->imagem ?? NULL;
+$categoria_id = $dados->categoria_id ?? NULL;
 
-    $valor = number_format($valor,2,",",".");
+$valor = number_format($valor, 2, ",", ".");
 ?>
+
+<style>
+    /* From Uiverse.io by adamgiebl */ 
+.cssbuttons-io-button {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(
+    0deg,
+    rgba(20, 167, 62, 1) 0%,
+    rgba(102, 247, 113, 1) 100%
+  );
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #14a73e98;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+}
+
+.cssbuttons-io-button svg {
+  margin-right: 6px;
+}
+
+.cssbuttons-io-button:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
+}
+
+.cssbuttons-io-button:active {
+  box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+}
+</style>
 
 <div class="container">
     <div class="card">
@@ -41,29 +77,29 @@
                 <div class="row">
                     <div class="col-12 col-md-1">
                         <label for="id">ID:</label>
-                        <input type="text" readonly name="id" id="id" class="form-control" value="<?=$id?>">
+                        <input type="text" readonly name="id" id="id" class="form-control" value="<?= $id ?>">
                     </div>
                     <div class="col-12 col-md-8">
                         <label for="nome">Nome do Produto</label>
-                        <input type="text" name="nome" id="nome" class="form-control" required data-parsley-required-message="Digite o nome" placeholder="Digite aqui" value="<?=$nome?>">
+                        <input type="text" name="nome" id="nome" class="form-control" required data-parsley-required-message="Digite o nome" placeholder="Digite aqui" value="<?= $nome ?>">
                     </div>
                     <div class="col-12 col-md-3">
                         <label for="categoria_id">Categoria:</label>
                         <select name="categoria_id" id="categoria_id" required class="form-control" data-parsley-required-message="Selecione uma categoria">
                             <option value=""></option>
                             <?php
-                                $dadosCategoria = $this->produto->listarCategoria();
-                                foreach ($dadosCategoria as $dados) {
-                                    ?>
-                                    <option value="<?=$dados->id?>">
-                                        <?=$dados->descricao?>
-                                    </option>
-                                    <?php
-                                }
+                            $dadosCategoria = $this->produto->listarCategoria();
+                            foreach ($dadosCategoria as $dados) {
+                            ?>
+                                <option value="<?= $dados->id ?>">
+                                    <?= $dados->descricao ?>
+                                </option>
+                            <?php
+                            }
                             ?>
                         </select>
                         <script>
-                            $("#categoria_id").val(<?=$categoria_id?>);
+                            $("#categoria_id").val(<?= $categoria_id ?>);
                         </script>
                     </div>
                 </div>
@@ -71,7 +107,7 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <label for="descricao">Descrição do produto:</label>
-                        <textarea name="descricao" id="descricao" class="form-control" required data-parsley-required-message="Digite uma descrição"><?=$descricao?></textarea>
+                        <textarea name="descricao" id="descricao" class="form-control" required data-parsley-required-message="Digite uma descrição"><?= $descricao ?></textarea>
                     </div>
                 </div>
                 <br>
@@ -79,11 +115,11 @@
                     <div class="col-12 col-md-6">
                         <label for="imagem">Selecione uma foto JPG:</label>
                         <input type="file" name="imagem" id="imagem" class="form-control" accept=".jpg">
-                        <input type="hidden" name="imagem" value="<?=$imagem?>">
+                        <input type="hidden" name="imagem" value="<?= $imagem ?>">
                     </div>
                     <div class="col-12 col-md-2">
                         <label for="valor">Valor:</label>
-                        <input type="text" name="valor" id="valor" class="form-control" data-parsley-required-message="Digite o valor" required placeholder="0.00" value="<?=$valor?>">
+                        <input type="text" name="valor" id="valor" class="form-control" data-parsley-required-message="Digite o valor" required placeholder="0.00" value="<?= $valor ?>">
                     </div>
                     <div class="col-12 col-md-2">
                         <label for="destaque">Destaque:</label>
@@ -93,7 +129,7 @@
                             <option value="N">Não</option>
                         </select>
                         <script>
-                            $("#destaque").val("<?=$destaque?>");
+                            $("#destaque").val("<?= $destaque ?>");
                         </script>
                     </div>
                     <div class="col-12 col-md-2">
@@ -104,14 +140,27 @@
                             <option value="N">Não</option>
                         </select>
                         <script>
-                            $("#ativo").val("<?=$ativo?>");
+                            $("#ativo").val("<?= $ativo ?>");
                         </script>
                     </div>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-success float-end">
-                    <i class="fas fa-check"></i> Salvar/Alterar
+                <!-- From Uiverse.io by adamgiebl -->
+                <button class="cssbuttons-io-button float-end" type="submit">
+                    <svg
+                        height="24"
+                        width="24"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
+                    </svg>
+                    <span>Salvar/Alterar</span>
                 </button>
+
+                <!-- <button type="submit" class="btn btn-success float-end">
+                    <i class="fas fa-check"></i> Salvar/Alterar
+                </button> -->
             </form>
         </div>
     </div>
@@ -124,6 +173,9 @@
         });
     });
 
-    
-    $('#valor').maskMoney({thousands:'.', decimal:','});
+
+    $('#valor').maskMoney({
+        thousands: '.',
+        decimal: ','
+    });
 </script>
