@@ -1,8 +1,9 @@
 <?php
     class Conexao {
         private static $host = 'localhost';
+        // private static $email = 'lessio@gmail.com';
         private static $usuario = 'root';
-        private static $senha = '';
+        private static $senha = '1234';
         private static $banco = 'pneuxpress';
 
         public static function conectar() {

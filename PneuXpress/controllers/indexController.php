@@ -6,10 +6,17 @@
         private $conexao;
         public $usuario;
 
-        public function __contruct() {
+        public function __construct() {
+            // Ensure a session is started before using $_SESSION
+            if (session_status() !== PHP_SESSION_ACTIVE) {
+                session_start();
+            }
+
             $db = new Conexao();
             $pdo = $db->conectar();
-            $this->usuario = new usuario($pdo);
+            $this->conexao = $pdo;
+            // Instantiate the Usuario model (match class name capitalization)
+            $this->usuario = new Usuario($pdo);
         }
 
         public function index() {
@@ -28,18 +35,22 @@
 
         public function verificar($email, $senha) {
             $dadosUsuario = $this->usuario->getUsuario($email);
-            
+
             if (empty($dadosUsuario->id)) {
                 echo "<script>mensagem('Usuário inválido!', 'index', 'error');</script>";
-            } else if (!password_verify($senha, $dadosUsuario->senha)) {
-                echo "<script>mensagem('Senha inválida!', 'index', 'error');</script>";
+                return; // stop further execution
             }
-            
+
+            if (!password_verify($senha, $dadosUsuario->senha)) {
+                echo "<script>mensagem('Senha inválida!', 'index', 'error');</script>";
+                return; // stop further execution
+            }
+
+            // Successful login -> store session and redirect
             $_SESSION["pneuxpress"] = array(
                 "id" => $dadosUsuario->id,
                 "nome" => $dadosUsuario->nome
             );
             echo "<script>location.href='index'</script>";
-
         }
     }

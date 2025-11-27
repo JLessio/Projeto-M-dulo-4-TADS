@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../public/css/style.css">
 <div class="login">
     <div class="card">
         <div class="card-header">
